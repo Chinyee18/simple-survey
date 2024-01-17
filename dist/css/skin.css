@@ -16,7 +16,7 @@ body {
   width: 550px;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 550px) {
   .body-container {
     width: 94%;
   }
@@ -92,7 +92,7 @@ a {
   margin: 0;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 550px) {
   .question {
     padding: 20px;
   }
