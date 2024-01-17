@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="webApplication">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="" />
+    <!-- sms picture -->
+    <meta property="og:image" content="dist/images/sms.jpg" />
+
+    <title>Web Application | simple survey</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="dist/css/skin.css">
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- The Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-mask/1.6.3/mask.js"></script>
+
+    <!-- APPLICATION SPECIFIC -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- mini-app components -->
+    <script src="dist/js/app/app_module.js"></script>
+</head>
+
+<body ng-cloak ng-controller="Controller">
+    <div id="page" class=" px-0">
+        <div class="body-container mx-auto">
+            <div class="row">
+                <div class="col-12 mt-4 text-center">
+                    <h2 class="text-purple mt-3 mb-4 b">Repayment Survey</h2>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="body-container mx-auto" >
+            <!-- survey Q&A -->
+                <div class="col-12 text-gray ">
+                    <div class="question" ng-hide="questionIndex == 7">
+                        <p class="text-gray-dark text-center" ng-if="questionIndex == 8">
+                            <br>Thank you for your time participating in this survey. <br>
+                            We will reach out to you to discuss your preferred repayment terms based on your response.
+                        </p>
+                        <form name="customForm">
+                            <div ng-switch on="questionIndex" class="mx-auto">
+                                <div ng-switch-when="1">
+                                    <p class="text-gray-dark text-font-bold" id="q1" >
+                                        {{survey[0].id}}. {{survey[0].question}}
+                                        <div class="form-check" ng-repeat="a in survey[0].answer">
+                                            <input class="form-check-input" type="radio" ng-model="data.q1" name="q1" value="{{a}}" required>
+                                            <label class="form-check-label capitalize">
+                                                {{a}}
+                                            </label>
+                                        </div>
+                                    </p>
+                                </div>
+                                
+                                <div ng-switch-when="2">
+                                    <p class="text-gray-dark text-font-bold" id="q2" >
+                                        {{survey[1].id}}. {{survey[1].question}}
+                                        <div class="form-check" ng-repeat="a in survey[1].answer" >
+                                            <input class="form-check-input" type="radio" ng-model="data.q2" name="q2" value="{{a}}" required>
+                                            <label class="form-check-label capitalize">
+                                                {{a}}
+                                            </label>
+                                        </div>
+                                    </p>
+                                </div>
+    
+                                <div ng-switch-when="3">
+                                    <p class="text-gray-dark text-font-bold" id="q3">
+                                        {{survey[2].id}}. {{survey[2].question}}
+                                        <div class="form-check" ng-repeat="a in survey[2].answer" >
+                                            <input class="form-check-input" type="radio" ng-model="data.q3" name="q3" value="{{a}}" required>
+                                            <label class="form-check-label capitalize">
+                                                {{a}}
+                                            </label>
+                                        </div>
+                                    </p>
+                                </div>
+                                
+                                <div ng-switch-when="4">
+                                    <p class="text-gray-dark text-font-bold" id="q4" >
+                                        {{survey[3].id}}. {{survey[3].question}}
+                                        <div class="form-check" ng-repeat="a in survey[3].answer">
+                                            <input class="form-check-input" type="radio" ng-model="data.q4" name="q4" value="{{a}}" >
+                                            <label class="form-check-label capitalize">
+                                                {{a}}
+                                            </label>
+                                        </div>
+                                    </p>
+                                </div>
+    
+                                <div ng-switch-when="5">
+                                    <p class="text-gray-dark text-font-bold" id="q5" >
+                                        {{survey[4].id}}. {{survey[4].question}}
+                                        <div class="form-check" ng-repeat="a in survey[4].answer">
+                                            <input class="form-check-input" type="radio" ng-model="data.q5" name="q5" value="{{a}}" >
+                                            <label class="form-check-label capitalize">
+                                                {{a}}
+                                            </label>
+                                        </div>
+                                    </p>
+                                </div>
+    
+                                <div ng-switch-when="6">
+                                    <p class="text-gray-dark text-font-bold" id="q6" >
+                                        {{survey[5].id}}. {{survey[5].question}}
+                                        <div class="form-check" ng-repeat="a in survey[5].answer">
+                                            <input class="form-check-input" type="radio" ng-model="data.q6" name="q6" value="{{a}}" >
+                                            <label class="form-check-label capitalize">
+                                                {{a}}
+                                            </label>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>  
+                        <div class="text-center mx-auto">
+                            <button class="purple-button btn-2" ng-click="prev()" ng-hide="questionIndex <= 1 || questionIndex > 6" >
+                                Previous
+                            </button>
+                            <button class="purple-button btn-2" ng-click="next(customForm)" ng-hide="questionIndex > survey.length  ">
+                                Next
+                            </button>
+                        </div>  
+                    </div>
+                    
+                    <div ng-if="questionIndex > 1 && questionIndex != 8" class="mt-4 mb-5 ">
+                        <p class="text-gray-dark" ng-if="data.q1 && questionIndex > 1"> 
+                            1. My current monthly income is
+                            <span class="text-font-bold text-purple">{{data.q1}}</span> 
+                            per month
+                        </p>
+                        <p class="text-gray-dark" ng-if="data.q2 && questionIndex > 2"> 
+                            2. My current employment status is 
+                            <span class="text-font-bold text-purple">{{data.q2}}</span>
+                        </p>
+                        <p class="text-gray-dark" ng-if="data.q3 && questionIndex > 3"> 
+                            3. 
+                            <span class="text-font-bold text-purple">{{data.q3}}</span> I do consider shortening your loan/ financing tenure in order to reduce your total interest/financing cost
+                        </p>
+                        <p class="text-gray-dark" ng-if="data.q4 && questionIndex > 4"> 
+                            4. I prefer 
+                            <span class="text-font-bold text-purple">{{data.q4}}</span>
+                        </p>
+                        <p class="text-gray-dark" ng-if="data.q5 && questionIndex > 5"> 
+                            5. My reason is
+                            <span class="text-font-bold text-purple">{{data.q5}}</span>
+                        </p>
+                        <div ng-if="data.q6 && questionIndex > 6">
+                            <p class="text-gray-dark" > 
+                                6. I consider shortening my loans in 
+                                <span class="text-font-bold text-purple">{{data.q6}}</span>
+                            </p>
+                        </div>
+                        <div class="text-center mx-auto">
+                            <button class="purple-button btn-2" ng-click="next(customForm)" ng-show ="questionIndex == survey.length + 1">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+    </body>
+
+</html>
